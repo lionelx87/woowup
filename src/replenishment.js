@@ -9,6 +9,18 @@ async function replenishment() {
 
     const purchasesDatesBySKU = getPurchaseDatesBySKU(regularProductsBySKU, purchases);
 
+    purchasesDatesBySKU.forEach( purchase => {
+        let acc = 0;
+        for(let i = 0; i < purchase.dates.length - 1; i++) {
+            acc += diffInDays(purchase.dates[i], purchase.dates[i + 1]);
+        }
+        const promedio = Math.round(acc / purchase.dates.length);
+        let lastDate = new Date(purchase.dates[purchase.dates.length - 1]);
+        let nextDate = new Date(lastDate);
+        nextDate.setDate(lastDate.getDate() + promedio);
+        console.log('nextDate: ', nextDate.toISOString().split('T')[0]);
+    });
+
     // console.log(diffInDays("2020-10-01", "2020-11-06"));
     // console.log(diffInDays("2020-09-03", "2020-10-01"));
     // console.log(diffInDays("2020-03-03", "2020-09-03"));
