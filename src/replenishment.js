@@ -9,8 +9,16 @@ async function replenishment() {
 
     const purchasesDatesBySKU = getPurchaseDatesBySKU(regularProductsBySKU, purchases);
 
+    // AVERAGE
+
     purchasesDatesBySKU.forEach( purchase =>{
-        console.log(`Probablemente la proxima compra del producto ${purchase.name} sea el ${getNextPurchaseDateWithAverage(purchase.dates)}`);
+        console.log(`Probablemente la proxima compra del producto ${ purchase.name } sea el ${ getNextPurchaseDateWithAverage(purchase.dates) } (Promedio)`);
+    });
+
+    // MEDIAN 
+
+    purchasesDatesBySKU.forEach( purchase => {
+        console.log(`Probablemente la proxima compra del producto ${ purchase.name } sea el ${ getNextPurchaseDateWithMedian(purchase.dates) } (Mediana)`);
     });
 }
 
@@ -61,11 +69,30 @@ function getNextPurchaseDateWithAverage(dates) {
     for(let i = 0; i < dates.length - 1; i ++) {
         acc += diffInDays(dates[i], dates[i + 1]);
     }
-    const average = Math.round(acc / dates.length);
+    const average = Math.round(acc / (dates.length - 1));
     let lastPurchaseDate = new Date(dates[dates.length - 1]);
     let nextPurchaseDate = new Date(lastPurchaseDate);
     nextPurchaseDate.setDate(lastPurchaseDate.getDate() + average);
     return nextPurchaseDate.toISOString().split('T')[0];
+}
+
+function getNextPurchaseDateWithMedian(dates) {
+    
+    const diffBetweenDates = [];
+    
+    for(let i = 0; i < dates.length - 1; i ++) {
+        diffBetweenDates.push(diffInDays(dates[i], dates[i + 1]));
+    }
+    const middle = Math.floor(diffBetweenDates.length / 2);
+    
+    diffBetweenDatesSort = [...diffBetweenDates].sort( (a,b) => a - b);
+    
+    const median = diffBetweenDatesSort.length % 2 !== 0 ? diffBetweenDatesSort[middle] :  (diffBetweenDatesSort[middle - 1] + diffBetweenDatesSort[middle]) / 2;
+
+    let lastPurchaseDate = new Date(dates[diffBetweenDates.length - 1]);
+    let nextPurchaseDate = new Date(lastPurchaseDate);
+    nextPurchaseDate.setDate(lastPurchaseDate.getDate() + median);
+    return nextPurchaseDate.toISOString().split('T')[0]
 }
 
 replenishment();
