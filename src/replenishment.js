@@ -88,8 +88,9 @@ function getNextPurchaseDateWithMedian(dates) {
     diffBetweenDatesSort = [...diffBetweenDates].sort( (a,b) => a - b);
     
     const median = diffBetweenDatesSort.length % 2 !== 0 ? diffBetweenDatesSort[middle] :  (diffBetweenDatesSort[middle - 1] + diffBetweenDatesSort[middle]) / 2;
+    
+    let lastPurchaseDate = new Date(dates[dates.length - 1]);
 
-    let lastPurchaseDate = new Date(dates[diffBetweenDates.length - 1]);
     let nextPurchaseDate = new Date(lastPurchaseDate);
     nextPurchaseDate.setDate(lastPurchaseDate.getDate() + median);
     return nextPurchaseDate.toISOString().split('T')[0]
