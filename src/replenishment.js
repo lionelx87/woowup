@@ -98,4 +98,11 @@ function getNextPurchaseDateWithMedian(dates) {
 
 replenishment();
 
-module.exports = replenishment;
+module.exports = {
+    replenishment, 
+    getRegularProductsBySKU,
+    diffInDays,
+    getPurchaseDatesBySKU,
+    getNextPurchaseDateWithAverage,
+    getNextPurchaseDateWithMedian
+};
