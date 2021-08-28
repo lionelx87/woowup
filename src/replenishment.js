@@ -9,6 +9,7 @@ async function replenishment() {
 
     const purchasesDatesBySKU = getPurchaseDatesBySKU(regularProductsBySKU, purchases);
 
+    console.log('==== REPLENISHMENT (Start)====');
     // AVERAGE
 
     purchasesDatesBySKU.forEach( purchase =>{
@@ -20,6 +21,7 @@ async function replenishment() {
     purchasesDatesBySKU.forEach( purchase => {
         console.log(`Probablemente la proxima compra del producto ${ purchase.name } sea el ${ getNextPurchaseDateWithMedian(purchase.dates) } (Mediana)`);
     });
+    console.log('==== REPLENISHMENT (Finish)====');
 }
 
 function getRegularProductsBySKU(purchases) {
