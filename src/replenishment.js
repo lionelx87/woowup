@@ -9,30 +9,9 @@ async function replenishment() {
 
     const purchasesDatesBySKU = getPurchaseDatesBySKU(regularProductsBySKU, purchases);
 
-    purchasesDatesBySKU.forEach( purchase => {
-        let acc = 0;
-        for(let i = 0; i < purchase.dates.length - 1; i++) {
-            acc += diffInDays(purchase.dates[i], purchase.dates[i + 1]);
-        }
-        const promedio = Math.round(acc / purchase.dates.length);
-        let lastDate = new Date(purchase.dates[purchase.dates.length - 1]);
-        let nextDate = new Date(lastDate);
-        nextDate.setDate(lastDate.getDate() + promedio);
-        console.log('nextDate: ', nextDate.toISOString().split('T')[0]);
+    purchasesDatesBySKU.forEach( purchase =>{
+        console.log(`Probablemente la proxima compra del producto ${purchase.name} sea el ${getNextPurchaseDateWithAverage(purchase.dates)}`);
     });
-
-    // console.log(diffInDays("2020-10-01", "2020-11-06"));
-    // console.log(diffInDays("2020-09-03", "2020-10-01"));
-    // console.log(diffInDays("2020-03-03", "2020-09-03"));
-    // console.log(diffInDays("2020-02-05", "2020-03-03"));
-    // console.log(diffInDays("2020-01-01", "2020-02-05")); // 62
-
-
-    // TODO: Cacular promedio
-    
-     // TODO: Tiempo de recompra de cada sku, generar un array con los tiempos
-
-     // TODO: Sumar a la ultima fecha el tiempo estimado
 }
 
 function getRegularProductsBySKU(purchases) {
@@ -70,12 +49,24 @@ function getPurchaseDatesBySKU(skuProducts, purchases) {
         const purchasesBySKU = purchases.filter( purchase => purchase.products.some( product => product.sku === sku ));
         purchasesDates.push({
             sku,
+            name: purchasesBySKU.map( purchase => purchase.products.find( product => product.sku === sku).name)[0],
             dates: purchasesBySKU.map( purchase => purchase.date)
         });
     });
     return purchasesDates;
 }
 
+function getNextPurchaseDateWithAverage(dates) {
+    let acc = 0;
+    for(let i = 0; i < dates.length - 1; i ++) {
+        acc += diffInDays(dates[i], dates[i + 1]);
+    }
+    const average = Math.round(acc / dates.length);
+    let lastPurchaseDate = new Date(dates[dates.length - 1]);
+    let nextPurchaseDate = new Date(lastPurchaseDate);
+    nextPurchaseDate.setDate(lastPurchaseDate.getDate() + average);
+    return nextPurchaseDate.toISOString().split('T')[0];
+}
 
 replenishment();
 
