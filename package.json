@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "stairs": "node src/stairs",
-    "replenishment": "node src/replenishment"
+    "woowup": "node index"
   },
   "keywords": [],
   "author": "",

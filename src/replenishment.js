@@ -1,6 +1,6 @@
+const MODE = require('./constants/replenishment.constants');
 const fs = require('fs');
-
-async function replenishment() {
+function replenishment(mode = MODE.AVERAGE) {
     const shopping = JSON.parse(fs.readFileSync('api/purchases.json', 'utf8'));
     
     const purchases = shopping.customer.purchases;
@@ -9,19 +9,16 @@ async function replenishment() {
 
     const purchasesDatesBySKU = getPurchaseDatesBySKU(regularProductsBySKU, purchases);
 
-    console.log('==== REPLENISHMENT (Start)====');
-    // AVERAGE
-
-    purchasesDatesBySKU.forEach( purchase =>{
-        console.log(`Probablemente la proxima compra del producto ${ purchase.name } sea el ${ getNextPurchaseDateWithAverage(purchase.dates) } (Promedio)`);
-    });
-
-    // MEDIAN 
-
+    const nextPurchases = [];
+    
     purchasesDatesBySKU.forEach( purchase => {
-        console.log(`Probablemente la proxima compra del producto ${ purchase.name } sea el ${ getNextPurchaseDateWithMedian(purchase.dates) } (Mediana)`);
+        nextPurchases.push({
+            name: purchase.name,
+            nextPurchase: mode === MODE.MEDIAN ? getNextPurchaseDateWithMedian(purchase.dates) : getNextPurchaseDateWithAverage(purchase.dates)
+        })
     });
-    console.log('==== REPLENISHMENT (Finish)====');
+
+    return nextPurchases;
 }
 
 function getRegularProductsBySKU(purchases) {
@@ -43,9 +40,9 @@ function getRegularProductsBySKU(purchases) {
 }
 
 function diffInDays(start, end) {
+    const MS_PER_DAY = 1000 * 60 * 60 * 24;
     start = new Date(start);
     end = new Date(end);
-    const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
     const utcStart = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
     const utcEnd = Date.UTC(end.getFullYear(), end.getMonth(), end.getDate());
