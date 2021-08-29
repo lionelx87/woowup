@@ -20,10 +20,10 @@ El análisis y uso inteligente de datos. Me parece un interesante desafío (en c
 - Ejercicio 2.1: Extra
 
 ```
-npm install
+npm install // Instalación de dependencias
 ```
 ```
-npm run woowup
+npm run woowup // Ejecución del script principal
 ```
 
 Para el punto extra (2.1), la solución que emplee para que un valor atípico no me afecte el cálculo de la frecuencia de compra habitual, fue emplear la mediana en lugar del promedio. Aplicando esta herramienta del campo de la estadistica, puedo lograr que valores extremos y/o atípicos, no me afecte el cálculo buscado.
