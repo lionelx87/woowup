@@ -6,12 +6,12 @@ Repositorio correspondiente al Challenge presentado por WoowUp para el puesto de
 
 ¿Me contarías sobre algún libro o artículo técnico que leíste recientemente? ¿Por qué te gustó y por qué debería leerlo?
 
-Actualmente estoy leyendo (por 2da vez) Clean Code de Robert Martin, si bien algunas de las prácticas que se mencionan en el mismo han tenido algún tipo de evolución u otras quedaron desfasadas, considero que constituyen una base muy solida en la escritura de código limpio, reutilizable, mantenible y escalable. En mi caso, ha transmitido una responsabilidad mayor a la hora de desarrollar, agudizando mi ojo en los detalles de los mismos, creando un equilibrio entre los tiempos del mercado en estos años de experiencia y crear código que sea fácil de entender y extender por otra persona que no escribió el mismo. 
-También constantemente leo artículos en blog de desarrollo como medium, csstricks, consumo de cursos en video bajo demanda, lectura de documentación oficial.
+Actualmente estoy leyendo (por 2da vez) Clean Code de Robert Martin, si bien algunas de las prácticas que se mencionan en el mismo han tenido algún tipo de evolución u otras quedaron desfasadas, considero que constituyen una base muy sólida en la escritura de código limpio, reutilizable, mantenible y escalable. En mi caso, ha transmitido una responsabilidad mayor a la hora de desarrollar, agudizando mi ojo en los detalles de los mismos, creando un equilibrio entre los tiempos del mercado en estos años de experiencia y código que sea fácil de entender/extender por otro desarrollador que no escribió el mismo. 
+También constantemente leo artículos en blog de desarrollo como medium, csstricks, consumo de cursos en video bajo demanda, lectura de documentación oficial, etc.
 
 ¿Qué feature de WoowUp te gustó mucho? ¿Por qué?
 
-El análisis y uso inteligente de datos. Me parece un interesante desafío (en constante mejora) lograr predecir próximas compras con altos niveles de aciertos en aceptación por parte del usuario. Buscar patrones para afinar las ofertas que se le hagan a los clientes, resultando de real utilidad para estos últimos y no los categoricen como spam.
+El análisis y uso inteligente de datos. Me parece un interesante desafío (en constante mejora) lograr predecir próximas compras con altos niveles de aciertos en aceptación por parte del usuario. Buscar patrones para afinar las ofertas que se le hagan a los clientes, resultando de real utilidad para estos últimos y que no los categoricen como spam.
 
 # Ejecución de scripts
 
@@ -19,6 +19,9 @@ Ejercicio 1: Subir la escalera
 Ejercicio 2: Reaprovisionamiento de productos
 2.1. Extra
 
+```
+npm install
+```
 ```
 npm run woowup
 ```
