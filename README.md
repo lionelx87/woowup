@@ -15,9 +15,9 @@ El análisis y uso inteligente de datos. Me parece un interesante desafío (en c
 
 # Ejecución de scripts
 
-Ejercicio 1: Subir la escalera
-Ejercicio 2: Reaprovisionamiento de productos
-2.1. Extra
+- Ejercicio 1: Subir la escalera
+- Ejercicio 2: Reaprovisionamiento de productos
+- Ejercicio 2.1: Extra
 
 ```
 npm install
